@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            OutlinedButton(
+            ElevatedButton(
               onPressed: () async {
                 final d = await showDatePicker(
                   context: context,
