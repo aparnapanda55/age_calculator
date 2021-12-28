@@ -15,10 +15,17 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({
     Key? key,
   }) : super(key: key);
+
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  DateTime? dataSelected;
 
   @override
   Widget build(BuildContext context) {
@@ -32,20 +39,23 @@ class HomePage extends StatelessWidget {
           children: [
             OutlinedButton(
               onPressed: () async {
-                final dateSelected = await showDatePicker(
+                final d = await showDatePicker(
                   context: context,
                   initialDate: DateTime.now(),
                   firstDate: DateTime(1900),
                   lastDate: DateTime.now(),
                 );
-                print(dateSelected);
+                setState(() {
+                  dataSelected = d;
+                });
               },
               child: const Text('Choose your birthday'),
             ),
-            Padding(
-              padding: const EdgeInsets.all(20),
-              child: Text('You are 25 years 3 months 2 days old.'),
-            ),
+            if (dataSelected != null)
+              Padding(
+                padding: const EdgeInsets.all(20),
+                child: Text('You are 25 years 3 months 2 days old.'),
+              ),
           ],
         ),
       ),
