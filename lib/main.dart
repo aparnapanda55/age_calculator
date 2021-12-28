@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'calculator.dart';
+import 'package:intl/intl.dart';
 
 void main() {
   runApp(const MyApp());
@@ -52,17 +53,18 @@ class _HomePageState extends State<HomePage> {
               },
               child: const Text('Choose your birthday'),
             ),
-            if (dataSelected != null)
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Text('Your birthday is $dataSelected'),
+            if (dataSelected != null) ...[
+              const SizedBox(
+                height: 20,
               ),
-            if (dataSelected != null)
-              Padding(
-                padding: const EdgeInsets.all(20),
-                child: Text(
-                    'You are ${formatDuration(DateTime.now().difference(dataSelected!))} old.'),
+              Text(
+                  'Your birthday is on ${DateFormat.yMMMMEEEEd().format(dataSelected!)}'),
+              const SizedBox(
+                height: 20,
               ),
+              Text(
+                  'You are ${formatDuration(DateTime.now().difference(dataSelected!))} old.'),
+            ]
           ],
         ),
       ),
