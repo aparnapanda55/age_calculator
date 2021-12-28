@@ -62,8 +62,9 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 20,
               ),
-              Text(
-                  'You are ${formatDuration(DateTime.now().difference(dataSelected!))} old.'),
+              ...formatDuration(DateTime.now().difference(dataSelected!))
+                  .map((s) => Text('You are $s old.'))
+                  .toList()
             ]
           ],
         ),
