@@ -54,11 +54,16 @@ class _HomePageState extends State<HomePage> {
             if (dataSelected != null)
               Padding(
                 padding: const EdgeInsets.all(20),
-                child: Text('You are 25 years 3 months 2 days old.'),
+                child: Text(
+                    'You are ${formatDuration(DateTime.now().difference(dataSelected!))} old.'),
               ),
           ],
         ),
       ),
     );
   }
+}
+
+String formatDuration(Duration d) {
+  return '25 years 3 months 2 days';
 }
