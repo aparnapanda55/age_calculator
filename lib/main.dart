@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'calculator.dart';
 
 void main() {
   runApp(const MyApp());
@@ -62,8 +63,4 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
-}
-
-String formatDuration(Duration d) {
-  return '25 years 3 months 2 days';
 }
