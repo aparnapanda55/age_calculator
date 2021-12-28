@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'calculator.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter/services.dart';
 
 void main() {
   runApp(const MyApp());
@@ -87,7 +88,17 @@ class MyText extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: () {
+        Clipboard.setData(ClipboardData(text: value)).then((_) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              backgroundColor: Theme.of(context).primaryColor,
+              content: const Text('Copied to clipboard!'),
+              duration: const Duration(seconds: 1),
+            ),
+          );
+        });
+      },
       child: Text(
         value,
         style: const TextStyle(fontWeight: FontWeight.bold),
