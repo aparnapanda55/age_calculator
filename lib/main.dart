@@ -28,7 +28,14 @@ class HomePage extends StatelessWidget {
       ),
       body: Center(
         child: OutlinedButton(
-          onPressed: () {},
+          onPressed: () {
+            showDatePicker(
+              context: context,
+              initialDate: DateTime.now(),
+              firstDate: DateTime(1900),
+              lastDate: DateTime.now(),
+            );
+          },
           child: const Text('Choose your birthday'),
         ),
       ),
