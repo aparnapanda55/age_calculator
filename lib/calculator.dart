@@ -1,10 +1,10 @@
-const int daysPerYear = 365;
-const int daysPerMonth = 30;
+const daysPerYear = 365.25;
+const daysPerMonth = 30.417;
 
 String formatDuration(Duration d) {
-  final years = d.inDays ~/ daysPerYear;
-  final remainingDays = d.inDays % daysPerYear;
-  final months = remainingDays ~/ daysPerMonth;
-  final days = remainingDays % daysPerMonth;
+  final years = (d.inDays ~/ daysPerYear).floor();
+  final remainingDays = (d.inDays % daysPerYear).floor();
+  final months = (remainingDays ~/ daysPerMonth).floor();
+  final days = (remainingDays % daysPerMonth).floor();
   return '$years years $months months $days days';
 }
