@@ -27,16 +27,26 @@ class HomePage extends StatelessWidget {
         title: const Text('Age Calculator'),
       ),
       body: Center(
-        child: OutlinedButton(
-          onPressed: () {
-            showDatePicker(
-              context: context,
-              initialDate: DateTime.now(),
-              firstDate: DateTime(1900),
-              lastDate: DateTime.now(),
-            );
-          },
-          child: const Text('Choose your birthday'),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            OutlinedButton(
+              onPressed: () async {
+                final dateSelected = await showDatePicker(
+                  context: context,
+                  initialDate: DateTime.now(),
+                  firstDate: DateTime(1900),
+                  lastDate: DateTime.now(),
+                );
+                print(dateSelected);
+              },
+              child: const Text('Choose your birthday'),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(20),
+              child: Text('You are 25 years 3 months 2 days old.'),
+            ),
+          ],
         ),
       ),
     );
