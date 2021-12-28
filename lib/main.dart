@@ -27,7 +27,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  DateTime? dataSelected;
+  DateTime? dataSelected = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -57,18 +57,40 @@ class _HomePageState extends State<HomePage> {
               const SizedBox(
                 height: 20,
               ),
-              Text(
-                'Your birthday is on ${DateFormat.yMMMMEEEEd().format(dataSelected!)}',
+              Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text('Your birthday is on '),
+                  MyText(DateFormat.yMMMMEEEEd().format(dataSelected!)),
+                ],
               ),
               const SizedBox(
                 height: 20,
               ),
               ResultPane(
-                  items:
-                      formatDuration(DateTime.now().difference(dataSelected!))),
+                items: formatDuration(
+                  DateTime.now().difference(dataSelected!),
+                ),
+              ),
             ]
           ],
         ),
+      ),
+    );
+  }
+}
+
+class MyText extends StatelessWidget {
+  const MyText(this.value, {Key? key}) : super(key: key);
+  final String value;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: () {},
+      child: Text(
+        value,
+        style: const TextStyle(fontWeight: FontWeight.bold),
       ),
     );
   }
@@ -88,7 +110,14 @@ class ResultPane extends StatelessWidget {
           .map(
             (item) => Padding(
               padding: const EdgeInsets.all(5),
-              child: SelectableText('You are $item old.'),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text('You are '),
+                  MyText(item),
+                  const Text(' old.'),
+                ],
+              ),
             ),
           )
           .toList(),
