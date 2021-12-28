@@ -58,17 +58,40 @@ class _HomePageState extends State<HomePage> {
                 height: 20,
               ),
               Text(
-                  'Your birthday is on ${DateFormat.yMMMMEEEEd().format(dataSelected!)}'),
+                'Your birthday is on ${DateFormat.yMMMMEEEEd().format(dataSelected!)}',
+              ),
               const SizedBox(
                 height: 20,
               ),
-              ...formatDuration(DateTime.now().difference(dataSelected!))
-                  .map((s) => Text('You are $s old.'))
-                  .toList()
+              ResultPane(
+                  items:
+                      formatDuration(DateTime.now().difference(dataSelected!))),
             ]
           ],
         ),
       ),
+    );
+  }
+}
+
+class ResultPane extends StatelessWidget {
+  const ResultPane({
+    Key? key,
+    required this.items,
+  }) : super(key: key);
+  final List<String> items;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: items
+          .map(
+            (item) => Padding(
+              padding: const EdgeInsets.all(5),
+              child: SelectableText('You are $item old.'),
+            ),
+          )
+          .toList(),
     );
   }
 }
